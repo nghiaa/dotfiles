@@ -8,11 +8,12 @@ things2avoid=" install.bash uninstall.bash install-fonts.sh install-ohmyzsh.sh o
 here="$( cd "$( dirname "$0" )" && pwd )"
 
 remove-symlinks () {
-    printf "\033[1;31;49m=== Removing symlinks in $HOME:\n\033[0m"
+    echo "Removing symlinks in $HOME:"
     for file in "$here"/*; do
         name="$(basename "$file")"
-        if [[ !( things2avoid =~ " $name " ) ]]; then
-            rm -rv "$HOME/.$name"
+        if [[ !( $things2avoid =~ " $name " ) ]]; then
+            echo "-> $HOME/.$name"
+            rm -rfv "$HOME/.$name"
         fi
     done
 }
@@ -34,5 +35,5 @@ remove-fonts() {
     echo "Powerline fonts uninstalled from $font_dir"
 }
 
-remove-symlinks ''
+remove-symlinks
 remove-fonts
