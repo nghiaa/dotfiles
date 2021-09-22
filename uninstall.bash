@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 set -e
 
-here="$(dirname "$0")"
-here="$(cd "$here"; pwd)"
-
 font_dir="$HOME/.fonts"
+things2avoid=" install.bash uninstall.bash install-fonts.sh install-ohmyzsh.sh oh-my-zsh-custom README.md "
+
+# workaround to run this script at any directory
+here="$( cd "$( dirname "$0" )" && pwd )"
 
 remove-symlinks () {
-    for file in "$here"/"$1"*; do
+    printf "\033[1;31;49m=== Removing symlinks in $HOME:\n\033[0m"
+    for file in "$here"/*; do
         name="$(basename "$file")"
-        if [[ !( " install.bash uninstall.bash oh-my-zsh-custom readme.md " =~ " $name " ) ]]; then
-            rm -rv "$HOME/.$1$name"
+        if [[ !( things2avoid =~ " $name " ) ]]; then
+            rm -rv "$HOME/.$name"
         fi
     done
 }
@@ -20,7 +22,7 @@ remove-fonts() {
         echo "No powerline fonts installed on your system. Uninstall not needed."
     else
         echo "Removing fonts..."
-        find "$powerline_fonts_dir" \( -name "$prefix*.[ot]tf" -or -name "$prefix*.pcf.gz" \) -type f -print0 | xargs -n1 -0 -I % sh -c "rm -f \"\$0/\${1##*/}\"" "$font_dir" %
+        rm -rfv "$font_dir"
     fi
 
     # Reset font cache
