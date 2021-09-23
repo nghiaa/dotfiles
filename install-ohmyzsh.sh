@@ -7,13 +7,13 @@ here="$(cd "$here"; pwd)"
 (cd $here; git submodule init)
 (cd $here; git submodule update)
 
-things2avoid=" install.bash uninstall.bash install-fonts.sh install-ohmyzsh.sh oh-my-zsh-custom README.md "
+things2Ignore=" install.bash uninstall.bash install-fonts.sh install-ohmyzsh.sh oh-my-zsh-custom README.md "
 
 install-ohmyzsh() {
     printf "\033[1;31;49m=== Creating symlinks in $HOME:\n\033[0m"
     for file in "$here"/*; do
         name="$(basename "$file")"
-        if [[ !( $things2avoid =~ " $name " ) ]]; then
+        if [[ !( $things2Ignore =~ " $name " ) ]]; then
             ln -sfv $file "$HOME/.$name"
             echo "-> $HOME/.$name"
         fi

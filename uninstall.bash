@@ -1,17 +1,34 @@
 #!/usr/bin/env bash
 set -e
 
+fzf_dir="$HOME/.fzf"
 font_dir="$HOME/.fonts"
-things2avoid=" install.bash uninstall.bash install-fonts.sh install-ohmyzsh.sh oh-my-zsh-custom README.md "
+things2Ignore=" install.bash uninstall.bash install-fonts.sh install-ohmyzsh.sh oh-my-zsh-custom README.md "
 
 # workaround to run this script at any directory
 here="$( cd "$( dirname "$0" )" && pwd )"
+
+uninstall_fzf() {
+    echo "Do you want to uninstall fzf (y/N)?"
+    read -n 1 c; echo ''
+    if [[ !( " y Y " =~ " $c " ) ]]; then
+        return
+    fi
+    
+    if [[ -d "$fzf_dir" ]]; then
+        if [[ -e "$fzf_dir/uninstall" ]]; then
+            # execute uninstall script
+            "$fzf_dir/uninstall"
+        fi
+        rm -rfv "$fzf_dir"
+    fi
+}
 
 remove-symlinks () {
     echo "Removing symlinks in $HOME:"
     for file in "$here"/*; do
         name="$(basename "$file")"
-        if [[ !( $things2avoid =~ " $name " ) ]]; then
+        if [[ !( $things2Ignore =~ " $name " ) ]]; then
             echo "-> $HOME/.$name"
             rm -rfv "$HOME/.$name"
         fi
@@ -35,5 +52,6 @@ remove-fonts() {
     echo "Powerline fonts uninstalled from $font_dir"
 }
 
+uninstall_fzf
 remove-symlinks
 remove-fonts
