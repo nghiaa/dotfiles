@@ -28,6 +28,9 @@ if [[ $c == 'Y' ]] || [[ $c == 'y' ]]; then
     ~/.fzf/install --all --no-update-rc
 fi
 
+printf "\033[1;32;49m=== Change default text editor \033[0m"
+sudo update-alternatives --config editor
+
 while [[ x${git_global_name} == 'x' ]]; do
     read -rp "gitconfig global name: " git_global_name
 done
