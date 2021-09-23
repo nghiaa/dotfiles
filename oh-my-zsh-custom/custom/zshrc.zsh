@@ -23,7 +23,10 @@ if which fzf > /dev/null; then
 fi
 
 export FZF_COMPLETION_TRIGGER=',,'
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -f "$HOME/.fzf.zsh" ]] && source $HOME/.fzf.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f "$HOME/.p10k.zsh" ]] && source $HOME/.p10k.zsh
 
 source $HOME/.oh-my-zsh/custom/plugins/zsh-histdb/sqlite-history.zsh
 autoload -Uz add-zsh-hook
