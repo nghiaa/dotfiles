@@ -11,8 +11,6 @@ download-meslo-fonts() {
 }
 
 install-powerline-fonts() {
-    sudo apt install -y fontconfig
-
     echo "Cleaning existing fonts..."
     mkdir -p "$font_dir"
     rm -rfv "$font_dir/*"

@@ -10,7 +10,7 @@ here="$(cd "$here"; pwd)"
 things2Ignore=" install.bash uninstall.bash install-fonts.sh install-ohmyzsh.sh oh-my-zsh-custom README.md "
 
 install-ohmyzsh() {
-    printf "\033[1;31;49m=== Creating symlinks in $HOME:\n\033[0m"
+    printf "\033[1;33;49m=== Creating symlinks in $HOME:\n\033[0m"
     for file in "$here"/*; do
         name="$(basename "$file")"
         if [[ !( $things2Ignore =~ " $name " ) ]]; then
@@ -21,7 +21,7 @@ install-ohmyzsh() {
 
     if [[ -d "$HOME/.oh-my-zsh" ]]; then
         find "$here/oh-my-zsh-custom" -maxdepth 1 -mindepth 1 -type f -print0 | xargs -0 -L 1 -I % ln -sfv % "$HOME/.oh-my-zsh/custom/"
-        find "$here/oh-my-zsh-custom/themes" -maxdepth 1 -mindepth 1 -print0 | xargs -0 -L 1 -I % ln -sfv % "$HOME/.oh-my-zsh/themes/"
+        find "$here/oh-my-zsh-custom/themes" -maxdepth 1 -mindepth 1 -print0 | xargs -0 -L 1 -I % ln -sfv % "$HOME/.oh-my-zsh/custom/themes/"
         find "$here/oh-my-zsh-custom/plugins/" -maxdepth 1 -mindepth 1 -print0 | xargs -0 -L 1 -I % ln -sfv % "$HOME/.oh-my-zsh/custom/plugins/"
     fi
 

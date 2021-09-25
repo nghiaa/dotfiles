@@ -44,27 +44,15 @@ plugins=(
     zsh-syntax-highlighting
 )
 
-# auto launching ssh-agent
-env=~/.ssh/agent.env
-
-agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
-
-agent_start () {
-    (umask 077; ssh-agent >| "$env")
-    . "$env" >| /dev/null ; }
-
-agent_load_env
-
-# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
-agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
-
-if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
-    agent_start
-    ssh-add
-elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-    ssh-add
+# load ssh keys using keychain
+if [[ -f $HOME/.my-ssh-keys.sh ]]; then
+  source $HOME/.my-ssh-keys.sh
+  for key in $ssh_keys; do
+    keychain --quiet --nocolor --ignore-missing "$key"
+  done
+  [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
+  [ -f $HOME/.keychain/$HOSTNAME-sh ] && \
+          . $HOME/.keychain/$HOSTNAME-sh
 fi
-
-unset env
 
 source $ZSH/oh-my-zsh.sh

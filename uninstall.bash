@@ -9,7 +9,7 @@ things2Ignore=" install.bash uninstall.bash install-fonts.sh install-ohmyzsh.sh 
 here="$( cd "$( dirname "$0" )" && pwd )"
 
 uninstall_fzf() {
-    echo "Do you want to uninstall fzf (y/N)?"
+    printf "\033[1;31;49m=== Do you want to uninstall fzf (Y/y)?\033[0m"
     read -n 1 c; echo ''
     if [[ !( " y Y " =~ " $c " ) ]]; then
         return
@@ -25,7 +25,7 @@ uninstall_fzf() {
 }
 
 remove-symlinks () {
-    echo "Removing symlinks in $HOME:"
+    printf "\033[1;31;49m=== Removing symlinks in $HOME:\033[0m"
     for file in "$here"/*; do
         name="$(basename "$file")"
         if [[ !( $things2Ignore =~ " $name " ) ]]; then

@@ -3,10 +3,17 @@ set -e
 
 sudo apt update
 
-printf "\033[1;31;49m=== Installing necessary packages \n\033[0m"
-sudo apt -y install zsh tmux vim aptitude git curl wget
-sudo apt -y install debhelper autotools-dev dh-autoreconf file
-sudo apt -y install libncurses5-dev libevent-dev pkg-config libutempter-dev build-essential
+printf "\033[1;33;49m=== Installing necessary packages \n\033[0m"
+# terminal & editor
+sudo apt -y install zsh tmux vim fontconfig
+
+# utilities
+sudo apt -y install git curl wget tar zip unzip keychain openvpn
+sudo apt -y install gdebi-core aptitude manpages manpages-dev file
+
+# dev packages
+sudo apt -y install libutempter-dev debhelper autotools-dev dh-autoreconf
+sudo apt -y install libncurses5-dev libevent-dev pkg-config build-essential
 
 printf "\033[1;32;49m=== Type Y/y to install/update python3: \033[0m"
 read -n 1 c; echo ''
@@ -31,6 +38,9 @@ fi
 printf "\033[1;32;49m=== Change default text editor \033[0m"
 sudo update-alternatives --config editor
 
+printf "\033[1;32;49m=== Configure git \n\033[0m"
+
+# git config
 while [[ x${git_global_name} == 'x' ]]; do
     read -rp "gitconfig global name: " git_global_name
 done
@@ -45,3 +55,16 @@ cat <<EOF > $HOME/.gitconfigp
 [core]
 	excludesfile = $HOME/.gitignore
 EOF
+
+# create a file to store your ssh keys for auto loading
+echo "Create my-ssh-keys.sh"
+
+cat <<EOF > $HOME/.my-ssh-keys.sh
+# put your ssh keys here to automatically load them
+# keys must be placed at default location: $HOME/.ssh/
+ssh_keys=(
+    # your_key
+)
+EOF
+
+chmod 744 $HOME/.my-ssh-keys.sh
