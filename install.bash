@@ -8,18 +8,17 @@ printf "\033[1;33;49m=== Installing necessary packages \n\033[0m"
 sudo apt -y install zsh tmux vim fontconfig
 
 # utilities
-sudo apt -y install git curl wget tar zip unzip keychain openvpn
+sudo apt -y install git curl wget tar zip unzip keychain
 sudo apt -y install gdebi-core aptitude manpages manpages-dev file
 
 # dev packages
 sudo apt -y install libutempter-dev debhelper autotools-dev dh-autoreconf
-sudo apt -y install libncurses5-dev libevent-dev pkg-config build-essential
+sudo apt -y install libncurses5-dev libevent-dev pkg-config bison build-essential
 
-printf "\033[1;32;49m=== Type Y/y to install/update python3: \033[0m"
-read -n 1 c; echo ''
-if [[ $c == 'Y' ]] || [[ $c == 'y' ]]; then
-    sudo apt -y install python3 python3-venv python3-dev python3-pip
-fi
+printf "\033[1;33;49m=== Installing python3 and packages: \033[0m"
+sudo apt -y install python3 python3-venv python3-dev python3-pip
+sudo pip3 install --system wheel
+sudo pip3 install --system powerline-status
 
 source ./install-fonts.sh && install-powerline-fonts
 source ./install-ohmyzsh.sh && install-ohmyzsh
