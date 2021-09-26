@@ -1,7 +1,7 @@
 #!/bin/sh
 
 font_dir="$HOME/.fonts"
-temp="$HOME/powerline-font-temp"
+temp="$here/font-temp-140695"
 
 download-meslo-fonts() {
     wget -P "$temp" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
@@ -18,9 +18,8 @@ install-powerline-fonts() {
     if which fc-cache; then
         echo 'Installing powerline-patched-font...'
        
-        if [[ -d "$temp" ]]; then
-            rm -rfv "$temp"
-        fi            
+        # clear existing temp            
+        rm -rf "$temp"
 
         # download powerline fonts
         git clone --depth 1 https://github.com/powerline/fonts "$temp"
@@ -29,7 +28,7 @@ install-powerline-fonts() {
         download-meslo-fonts
 
         find "$temp" -regextype posix-extended -iregex '.*\.(otf|ttf)' -print0 | xargs -0 -I % mv -v % "$font_dir"
-        rm -rfv "$temp"
+        rm -rf "$temp"
         fc-cache -vf "$font_dir"
     fi
 }

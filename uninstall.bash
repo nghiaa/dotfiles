@@ -20,7 +20,7 @@ uninstall_fzf() {
             # execute uninstall script
             "$fzf_dir/uninstall"
         fi
-        rm -rfv "$fzf_dir"
+        rm -rf "$fzf_dir"
     fi
 }
 

@@ -1,9 +1,6 @@
 #!/bin/sh
 
 # workaround to run this script at any directory
-here="$(dirname "$0")"
-here="$(cd "$here"; pwd)"
-
 (cd $here; git submodule init)
 (cd $here; git submodule update)
 

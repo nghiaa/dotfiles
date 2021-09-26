@@ -50,9 +50,8 @@ if [[ -f $HOME/.my-ssh-keys.sh ]]; then
   for key in $ssh_keys; do
     keychain --quiet --nocolor --ignore-missing "$key"
   done
-  [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
   [ -f $HOME/.keychain/$HOSTNAME-sh ] && \
-          . $HOME/.keychain/$HOSTNAME-sh
+          source $HOME/.keychain/$HOSTNAME-sh
 fi
 
 source $ZSH/oh-my-zsh.sh
