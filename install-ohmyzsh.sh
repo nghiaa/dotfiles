@@ -1,18 +1,12 @@
-#!/bin/sh
-
-# workaround to run this script at any directory
-(cd $here; git submodule init)
-(cd $here; git submodule update)
-
-things2Ignore=" install.bash uninstall.bash install-fonts.sh install-ohmyzsh.sh oh-my-zsh-custom README.md "
+#!/usr/bin/env bash
+set -e
 
 install-ohmyzsh() {
-    printf "\033[1;33;49m=== Creating symlinks in $HOME:\n\033[0m"
+    printf "\033[1;33;49mCreating symlinks in $HOME:\n\033[0m"
     for file in "$here"/*; do
         name="$(basename "$file")"
-        if [[ !( $things2Ignore =~ " $name " ) ]]; then
+        if [[ !( $ignored_things =~ " $name " ) ]]; then
             ln -sfv $file "$HOME/.$name"
-            echo "-> $HOME/.$name"
         fi
     done
 
@@ -24,7 +18,15 @@ install-ohmyzsh() {
 
     printf "\033[1;32;49m=== Type Y/y to change default shell to zsh: \033[0m"
     read -n 1 c; echo '';
-    if [[ $c == 'Y' ]] || [[ $c == 'y' ]]; then
-        chsh -s `which zsh`
+    if [[ !( " y Y " =~ " $c " ) ]]; then
+        return
+    fi
+    zsh_dir="${which zsh}"
+    if chsh -s "$zsh_dir"; then
+        echo "Default shell has been changed successfully to $zsh_dir"
+    else
+        printf "\033[1;31;49m Unexpected error while trying to change default shell! \033[0m"
     fi
 }
+
+install-ohmyzsh

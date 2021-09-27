@@ -1,23 +1,25 @@
-#!/bin/sh
-
-tmux_dir="$here/tmux"
+#!/usr/bin/env bash
+set -e
 
 install () {
-    printf "\033[1;33;49m=== Installing tmux \033[0m"
+    printf "\033[1;32;49m=== Type Y/y to install tmux: \033[0m"
+    read -n 1 c; echo '';
+    if [[ !( " y Y " =~ " $c " ) ]]; then
+        return
+    fi
+
+    echo "Installing tmux..."
     git clone https://github.com/tmux/tmux.git "$tmux_dir"
 
-    echo "Preparing..."
+    echo "Compiling tmux..."
     cd "$tmux_dir"
-    sh autogen.sh
-
-    echo "compiling tmux..."
-    ./configure >/dev/null 2>&1
     make >/dev/null 2>&1
 
-    echo "copying binaries..."
+    echo "Copying binaries..."
     sudo make install
-    make clean
     
     echo "tmux installed successfully!"
     cd "$here"
 }
+
+install

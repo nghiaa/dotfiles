@@ -1,15 +1,24 @@
 #!/usr/bin/env bash
 set -e
 
-fzf_dir="$HOME/.fzf"
-font_dir="$HOME/.fonts"
-things2Ignore=" install.bash uninstall.bash install-fonts.sh install-ohmyzsh.sh oh-my-zsh-custom README.md "
+source ./initialize.sh
 
-# workaround to run this script at any directory
-here="$( cd "$( dirname "$0" )" && pwd )"
+uninstall_tmux() {
+    printf "\033[1;31;49m=== Do you want to uninstall tmux (Y/y)? \033[0m"
+    read -n 1 c; echo ''
+    if [[ !( " y Y " =~ " $c " ) ]]; then
+        return
+    fi
+
+    cd "$tmux_dir"
+    echo "Uninstalling tmux..."
+    make >/dev/null 2>&1
+    sudo make uninstall
+    cd "$here"
+}
 
 uninstall_fzf() {
-    printf "\033[1;31;49m=== Do you want to uninstall fzf (Y/y)?\033[0m"
+    printf "\033[1;31;49m=== Do you want to uninstall fzf (Y/y)? \033[0m"
     read -n 1 c; echo ''
     if [[ !( " y Y " =~ " $c " ) ]]; then
         return
@@ -25,11 +34,10 @@ uninstall_fzf() {
 }
 
 remove-symlinks () {
-    printf "\033[1;31;49m=== Removing symlinks in $HOME:\033[0m"
+    printf "\033[1;31;49mRemoving symlinks in $HOME:\033[0m"
     for file in "$here"/*; do
         name="$(basename "$file")"
-        if [[ !( $things2Ignore =~ " $name " ) ]]; then
-            echo "-> $HOME/.$name"
+        if [[ !( $ignored_things =~ " $name " ) ]]; then
             rm -rfv "$HOME/.$name"
         fi
     done
@@ -40,7 +48,7 @@ remove-fonts() {
         echo "No powerline fonts installed on your system. Uninstall not needed."
     else
         echo "Removing fonts..."
-        rm -rfv "$font_dir"
+        rm -rf "$font_dir"
     fi
 
     # Reset font cache
@@ -52,6 +60,7 @@ remove-fonts() {
     echo "Powerline fonts uninstalled from $font_dir"
 }
 
+uninstall_tmux
 uninstall_fzf
 remove-symlinks
 remove-fonts
