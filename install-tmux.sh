@@ -2,6 +2,10 @@
 set -e
 
 install () {
+    if which tmux; then
+        return
+    fi
+
     printf "\033[1;32;49m=== Type Y/y to install tmux: \033[0m"
     read -n 1 c; echo '';
     if [[ !( " y Y " =~ " $c " ) ]]; then

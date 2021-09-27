@@ -25,7 +25,7 @@ install-ohmyzsh() {
     if chsh -s "$zsh_dir"; then
         echo "Default shell has been changed successfully to $zsh_dir"
     else
-        printf "\033[1;31;49m Unexpected error while trying to change default shell! \033[0m"
+        echo "Unexpected error while trying to change default shell!"
     fi
 }
 
