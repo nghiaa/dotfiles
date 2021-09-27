@@ -8,9 +8,6 @@ install () {
         return
     fi
 
-    echo "Installing tmux..."
-    git clone https://github.com/tmux/tmux.git "$tmux_dir"
-
     echo "Compiling tmux..."
     cd "$tmux_dir"
     make >/dev/null 2>&1

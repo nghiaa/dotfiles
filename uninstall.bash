@@ -34,7 +34,7 @@ uninstall_fzf() {
 }
 
 remove-symlinks () {
-    printf "\033[1;31;49mRemoving symlinks in $HOME:\033[0m"
+    printf "\033[1;31;49mRemoving symlinks in $HOME:\n\033[0m"
     for file in "$here"/*; do
         name="$(basename "$file")"
         if [[ !( $ignored_things =~ " $name " ) ]]; then

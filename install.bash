@@ -10,16 +10,15 @@ printf "\033[1;33;49mInstalling necessary packages...\n\033[0m"
 sudo apt -y install zsh vim fontconfig
 
 # utilities
-sudo apt -y install git curl wget tar zip unzip keychain
-sudo apt -y install gdebi-core aptitude manpages manpages-dev file
+sudo apt -y install git curl wget tar zip unzip keychain \
+                    gdebi-core aptitude manpages manpages-dev file
 
 # dev packages
-sudo apt -y install automake autoconf autotools-dev build-essential
-sudo apt -y install dh-autoreconf libutempter-dev debhelper
-        # packages required for building tmux
-        sudo apt -y install libncurses5-dev libevent-dev bison pkg-config
+sudo apt -y install automake autoconf autotools-dev build-essential \
+                    dh-autoreconf libutempter-dev debhelper \
+                    libncurses5-dev libevent-dev bison pkg-config
 
-printf "\033[1;33;49mInstalling python3 and packages...\033[0m"
+printf "\033[1;33;49mInstalling python3 and packages...\n\033[0m"
 sudo apt -y install python3 python3-venv python3-dev python3-pip
 sudo pip3 install --system wheel
 sudo pip3 install --system powerline-status
@@ -28,7 +27,7 @@ source ./install-fonts.sh
 source ./install-ohmyzsh.sh
 source ./install-tmux.sh
 
-printf "\033[1;33;49m=== Configure Vim \033[0m"
+printf "\033[1;33;49mConfigure Vim\n\033[0m"
 if [[ ! -d "$HOME/.vimbackup" ]]; then
     echo "Creating ~/.vimbackup"
     mkdir -p "$HOME/.vimbackup"

@@ -18,3 +18,7 @@
 	path = tmux
 	url = https://github.com/tmux/tmux.git
 	ignore = dirty
+[submodule "nvm"]
+	path = nvm
+	url = https://github.com/nvm-sh/nvm.git
+	ignore = dirty

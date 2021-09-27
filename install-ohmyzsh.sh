@@ -21,7 +21,7 @@ install-ohmyzsh() {
     if [[ !( " y Y " =~ " $c " ) ]]; then
         return
     fi
-    zsh_dir="${which zsh}"
+    zsh_dir="$(which zsh)"
     if chsh -s "$zsh_dir"; then
         echo "Default shell has been changed successfully to $zsh_dir"
     else
