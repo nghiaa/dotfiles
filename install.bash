@@ -66,7 +66,10 @@ cat <<EOF > $HOME/.gitconfigp
 EOF
 
 # create a file to store your ssh keys for auto loading
-echo "Create my-ssh-keys.sh successfully!"
+if [[ -f "$HOME/.my-ssh-keys.sh" ]]; then
+    echo "$HOME/.my-ssh-keys.sh existed!"
+    exit
+fi
 
 cat <<EOF > $HOME/.my-ssh-keys.sh
 # put your ssh keys here to automatically load them
@@ -77,3 +80,4 @@ ssh_keys=(
 EOF
 
 chmod 760 $HOME/.my-ssh-keys.sh
+echo "Create $HOME/.my-ssh-keys.sh successfully!"
