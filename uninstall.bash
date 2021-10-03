@@ -10,11 +10,10 @@ uninstall_tmux() {
         return
     fi
 
-    cd "$tmux_dir"
-    echo "Uninstalling tmux..."
-    make >/dev/null 2>&1
-    sudo make uninstall
-    cd "$here"
+    (cd "$tmux_dir"; \
+    echo "Uninstalling tmux..."; \
+    make >/dev/null 2>&1; \
+    sudo make uninstall)
 }
 
 uninstall_fzf() {

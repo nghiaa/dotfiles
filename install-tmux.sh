@@ -12,15 +12,12 @@ install () {
         return
     fi
 
-    echo "Compiling tmux..."
-    cd "$tmux_dir"
-    make >/dev/null 2>&1
-
-    echo "Copying binaries..."
-    sudo make install
-    
-    echo "tmux installed successfully!"
-    cd "$here"
+    (echo "Compiling tmux..."; \
+    cd "$tmux_dir"; \
+    make >/dev/null 2>&1; \
+    echo "Copying binaries..."; \
+    sudo make install; \
+    echo "tmux installed successfully!")
 }
 
 install

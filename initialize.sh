@@ -27,13 +27,12 @@ export ignored_things
 
 printf "\033[1;33;49mInitializing files...\n\033[0m"
 # init submodules
-cd $here && git submodule init
-cd $here && git submodule update
+(cd $here && git submodule init)
+(cd $here && git submodule update)
 
 # compile tmux
-cd "$tmux_dir"
 if [[ ! -f Makefile ]]; then
-    sh autogen.sh
-    ./configure >/dev/null 2>&1
+    (cd "$tmux_dir"; \
+    sh autogen.sh; \
+    ./configure >/dev/null 2>&1)
 fi
-cd $here
