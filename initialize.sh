@@ -31,7 +31,7 @@ printf "\033[1;33;49mInitializing files...\n\033[0m"
 (cd $here && git submodule update)
 
 # compile tmux
-if [[ ! -f Makefile ]]; then
+if [[ ! -f "$tmux_dir/Makefile" ]]; then
     (cd "$tmux_dir"; \
     sh autogen.sh; \
     ./configure >/dev/null 2>&1)
