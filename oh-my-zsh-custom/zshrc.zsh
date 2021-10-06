@@ -7,7 +7,7 @@ setopt NO_beep
 # aliases
 if [[ -f "$HOME/.oh-my-zsh/custom/.zshrc.alias" ]]; then
     while read -r line || [[ -n "$line" ]]; do
-        eval "alias $line"
+        alias "$line"
     done < "$HOME/.oh-my-zsh/custom/.zshrc.alias"
 fi
 

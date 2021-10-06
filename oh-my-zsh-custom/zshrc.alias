@@ -1,8 +1,0 @@
-ln='nocorrect ln'
-lsa='ls -alkiGF'
-rm='rm -r'
-cp='cp -vr'
-ctar='tar -pcvf'
-xtar='tar -pxvf'
-coigit='git status'
-ltar='tar -tvf'

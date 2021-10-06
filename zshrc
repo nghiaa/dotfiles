@@ -48,13 +48,13 @@ plugins=(
 if [[ -f $HOME/.my-ssh-keys.sh ]]; then
   source $HOME/.my-ssh-keys.sh
   for key in $ssh_keys; do
-    keychain --quiet --nocolor --ignore-missing "$key"
+    keychain --quiet --nocolor --stop others --ignore-missing "$key"
   done
   [ -f $HOME/.keychain/$HOSTNAME-sh ] && \
           source $HOME/.keychain/$HOSTNAME-sh
 fi
 
 # load nvm
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 
 source $ZSH/oh-my-zsh.sh
