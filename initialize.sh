@@ -7,7 +7,6 @@ here="$(cd "$here"; pwd)"
 
 # export locations for other scripts to use
 export here
-export tmux_dir="$here/tmux"
 export fzf_dir="$HOME/.fzf"
 export font_dir="$HOME/.fonts"
 
@@ -17,22 +16,11 @@ export font_dir="$HOME/.fonts"
 ignored_things=" install.bash "
 ignored_things+=" install-fonts.sh "
 ignored_things+=" install-ohmyzsh.sh "
-ignored_things+=" install-tmux.sh "
 ignored_things+=" initialize.sh "
 ignored_things+=" uninstall.bash "
 ignored_things+=" oh-my-zsh-custom "
-ignored_things+=" tmux "
 ignored_things+=" README.md "
 export ignored_things
 
-printf "\033[1;33;49mInitializing files...\n\033[0m"
-# init submodules
 (cd $here && git submodule init)
 (cd $here && git submodule update)
-
-# compile tmux
-if [[ ! -f "$tmux_dir/Makefile" ]]; then
-    (cd "$tmux_dir"; \
-    sh autogen.sh; \
-    ./configure >/dev/null 2>&1)
-fi

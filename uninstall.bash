@@ -3,19 +3,6 @@ set -e
 
 source ./initialize.sh
 
-uninstall_tmux() {
-    printf "\033[1;31;49m=== Do you want to uninstall tmux (Y/y)? \033[0m"
-    read -n 1 c; echo ''
-    if [[ !( " y Y " =~ " $c " ) ]]; then
-        return
-    fi
-
-    (cd "$tmux_dir"; \
-    echo "Uninstalling tmux..."; \
-    make >/dev/null 2>&1; \
-    sudo make uninstall)
-}
-
 uninstall_fzf() {
     printf "\033[1;31;49m=== Do you want to uninstall fzf (Y/y)? \033[0m"
     read -n 1 c; echo ''
@@ -59,7 +46,6 @@ remove-fonts() {
     echo "Powerline fonts uninstalled from $font_dir"
 }
 
-uninstall_tmux
 uninstall_fzf
 remove-symlinks
 remove-fonts

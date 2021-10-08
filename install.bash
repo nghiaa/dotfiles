@@ -25,7 +25,6 @@ sudo pip3 install --system powerline-status
 
 source ./install-fonts.sh
 source ./install-ohmyzsh.sh
-source ./install-tmux.sh
 
 printf "\033[1;33;49mConfigure Vim\n\033[0m"
 if [[ ! -d "$HOME/.vimbackup" ]]; then
