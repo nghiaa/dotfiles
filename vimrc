@@ -68,8 +68,6 @@ set autoindent
 " commands
 command BD bp|bd #
 
-map <F1> :NERDTreeToggle<CR>
-
 augroup pythonConf
     au FileType python map <leader>\ :!python %
 augroup END
