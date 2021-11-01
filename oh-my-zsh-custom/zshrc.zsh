@@ -5,10 +5,10 @@ setopt NO_clobber
 setopt NO_beep
 
 # aliases
-if [[ -f "$HOME/.oh-my-zsh/custom/.zshrc.alias" ]]; then
+if [[ -f "$HOME/.zshrc.alias" ]]; then
     while read -r line || [[ -n "$line" ]]; do
         alias "$line"
-    done < "$HOME/.oh-my-zsh/custom/.zshrc.alias"
+    done < "$HOME/.zshrc.alias"
 fi
 
 if which fzf > /dev/null; then
