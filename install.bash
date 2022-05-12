@@ -20,8 +20,8 @@ sudo apt -y install mysql-client build-essential automake autoconf \
 
 printf "\033[1;33;49mInstalling python3 and packages...\n\033[0m"
 sudo apt -y install python3 python3-venv python3-dev python3-pip
-sudo pip3 install --system wheel
-sudo pip3 install --system powerline-status
+sudo pip3 install wheel
+sudo pip3 install powerline-status
 
 source ./install-fonts.sh
 source ./install-ohmyzsh.sh
