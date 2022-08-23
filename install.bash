@@ -11,12 +11,15 @@ sudo apt -y install zsh vim fontconfig
 
 # utilities
 sudo apt -y install git curl wget tar zip unzip keychain \
-                    gdebi-core aptitude manpages manpages-dev file
+                    gdebi-core apt-file aptitude manpages manpages-dev file
 
 # dev packages
 sudo apt -y install mysql-client build-essential automake autoconf \
                     autotools-dev dh-autoreconf libutempter-dev debhelper \
                     libncurses5-dev libevent-dev bison pkg-config
+
+# networks
+sudo apt -y install net-tools openssh-client openssh-server
 
 printf "\033[1;33;49mInstalling python3 and packages...\n\033[0m"
 sudo apt -y install python3 python3-venv python3-dev python3-pip
